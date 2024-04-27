@@ -6,9 +6,10 @@ const logger = require('morgan');
 
 const { graphqlHTTP } = require('express-graphql');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const schema = require('./schema/root_schema');
+const carSchema = require('./schema/carSchema');
+const clientSchema = require('./schema/clientSchema');
+const rentalSchema = require('./schema/rentalSchema');
+//const schema = require('./schema/root_schema');
 
 const app = express();
 
@@ -22,16 +23,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
-app.use(
-    '/api',
-    graphqlHTTP({
-        schema,
-        graphiql: true,
-    }),
-);
+app.use('/api/cars', graphqlHTTP({
+    schema: carSchema,
+    graphiql: true,
+}));
+
+app.use('/api/clients', graphqlHTTP({
+    schema: clientSchema,
+    graphiql: true,
+}));
+
+app.use('/api/rentals', graphqlHTTP({
+    schema: rentalSchema,
+    graphiql: true,
+}));
+// app.use(
+//     '/api',
+//     graphqlHTTP({
+//         schema,
+//         graphiql: true,
+//     }),
+// );
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
