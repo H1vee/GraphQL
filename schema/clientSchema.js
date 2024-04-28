@@ -26,12 +26,13 @@ const Mutation = new graphql.GraphQLObjectType({
             resolve: async (parent, args) => await Client.create(args),
         },
         deleteClient: {
-            type: graphql.GraphQLString,
+            type: ClientType,
             args: {
                 ClientID: { type: graphql.GraphQLInt }
             },
             resolve: async (parent, args) => {
                 await Client.remove(args.ClientID);
+                return 'Client deleted successfully!';
             }
         },
     }),

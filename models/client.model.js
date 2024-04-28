@@ -23,9 +23,11 @@ Client.create = async (newClient)=>{
 };
 
 Client.getById = async (id)=>{
+    console.log(id);
     const query = 'SELECT * FROM Clients WHERE ClientID = ?';
     const [rows] = await db.query(query,[id]);
-    return rows[0];
+    console.log(rows);
+    return rows;
 };
 
 Client.remove = async(id)=>{

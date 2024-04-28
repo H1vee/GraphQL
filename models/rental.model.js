@@ -34,7 +34,7 @@ Rental.create = async (newRental)=>{
 Rental.getById = async (id)=>{
     const query = 'SELECT * FROM Rentals WHERE RentalID =?';
     const [rows]= await db.query(query,[id]);
-    return rows[0];
+    return rows;
 };
 
 Rental.remove = async(id)=>{

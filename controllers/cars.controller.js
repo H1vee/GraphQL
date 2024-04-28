@@ -15,12 +15,14 @@ const createCar = async(req,res)=>{
  
 };
 
-const deleteCar = async (req,res)=>{
-   
-        const car = await Car.remove(req.params.id);
-        res.status(200).json(car);
-  
-};
+const deleteCar = async (req, res) => {
+        try {
+            const car = await Car.remove(req.params.id);
+            res.status(200).json(car);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    };
 
 
 module.exports = {

@@ -4,7 +4,7 @@ const Car = require('../models/car.model');
 const CarType = new graphql.GraphQLObjectType({
     name: 'Car',
     fields: () => ({
-        carID: { type: graphql.GraphQLInt },
+        CarID: { type: graphql.GraphQLInt },
         Brand: { type: graphql.GraphQLString },
         Type: { type: graphql.GraphQLString },
         Year: { type: graphql.GraphQLInt },
@@ -34,6 +34,7 @@ const Mutation = new graphql.GraphQLObjectType({
             },
             resolve: async (parent, args) => {
                 await Car.remove(args.CarID);
+                return 'Car deleted successfully!';
             }
         },
     }),
